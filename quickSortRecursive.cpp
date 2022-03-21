@@ -1,19 +1,16 @@
 // median of three pivot selection
 
-#include <iostream>
 #include <vector>
-#include "utility.h"
 
 template<typename T>
 void insertion_sort(std::vector<T>& vec) {
-    int j;
     for (size_t i = 1; i < vec.size(); ++i)
     {
         T tmp = vec[i];
-        j = i - 1;
+        int j = i - 1;
         while (j >= 0 && vec[j] > tmp) {
             vec[j + 1] = vec[j];
-            j--;
+            --j;
         }
         vec[j + 1] = tmp;        
     }    
@@ -36,7 +33,7 @@ template<typename T>
 int partition(std::vector<T>& vec, int first, int last) {
     int mid = first + (last - first) / 2;
     sortFirstMiddleLast(vec, first, mid, last);
-    Utility::swap(vec[mid], vec[last - 1]);
+    std::swap(vec[mid], vec[last - 1]);
     int pivot_index = last - 1;
     T pivot = vec[pivot_index];
 
@@ -51,12 +48,12 @@ int partition(std::vector<T>& vec, int first, int last) {
             index_from_right--;
         }
         if (index_from_left < index_from_right) {
-            Utility::swap(vec[index_from_left], vec[index_from_right]);
+            std::swap(vec[index_from_left], vec[index_from_right]);
             index_from_left++;
             index_from_right--;
         } else done = true;
     }
-    Utility::swap(vec[pivot_index], vec[index_from_left]);
+    std::swap(vec[pivot_index], vec[index_from_left]);
     pivot_index = index_from_left;
     return pivot_index;
 }
